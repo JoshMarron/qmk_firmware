@@ -69,7 +69,7 @@ CSTANDARD = -std=gnu99
 #CXXDEFS += -D__STDC_CONSTANT_MACROS
 #CXXDEFS +=
 
-
+RGB_MATRIX_ENABLE=IS31FL3733
 
 
 #---------------- Compiler Options C ----------------
