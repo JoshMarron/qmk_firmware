@@ -21,6 +21,7 @@ static const int _FL = FUNC_LAYER;
 static const int _ML = MACRO_LAYER;
 
 static bool leds_off = 0;
+static bool caps_on = 0;
 
 keymap_config_t keymap_config;
 
@@ -135,9 +136,19 @@ void rgb_matrix_indicators_user(void)
 
     for (int i = 0; i < NUM_BORDER_KEYS; ++i)
     {
-        uint8_t r = pgm_read_byte(&borderledmap[layer][i][0]);
-        uint8_t g = pgm_read_byte(&borderledmap[layer][i][1]);
-        uint8_t b = pgm_read_byte(&borderledmap[layer][i][2]);
+        uint8_t r = 0; uint8_t g = 0; uint8_t b = 0;
+        if (caps_on)
+        {
+            r = 255;
+            g = 0;
+            b = 0;
+        }
+        else
+        {
+            r = pgm_read_byte(&borderledmap[layer][i][0]);
+            g = pgm_read_byte(&borderledmap[layer][i][1]);
+            b = pgm_read_byte(&borderledmap[layer][i][2]);
+        }
         rgb_matrix_set_color(i + BORDER_OFFSET, r, g, b);
     }
 };
@@ -150,6 +161,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint32_t key_timer;
 
     switch (keycode) {
+        case KC_CAPS:
+            // Intercept CAPS lock
+            if (record->event.pressed)
+            {
+                caps_on = caps_on ? 0 : 1;
+            }
+            return true;
         case U_T_AUTO:
             if (record->event.pressed && MODS_SHIFT && MODS_CTRL) {
                 TOGGLE_FLAG_AND_PRINT(usb_extra_manual, "USB extra port manual mode");

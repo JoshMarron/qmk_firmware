@@ -8,3 +8,5 @@ Add some vim macros for some of the coc commands
 Recompilable color modes for different keycap sets would be a nice to have
 
 Add macro keys for commonly used emojis, plus some of those japanese text emoji things
+
+The border should go red if caps lock is on
