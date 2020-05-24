@@ -54,15 +54,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #define NUM_FRONT_KEYS 88
 #define NUM_BORDER_KEYS 32
-#define BORDER_OFFSET 88
+#define BORDER_OFFSET 87
 
 #define YELL {237, 197, 66}
 #define BLU  {24, 83, 201}
+#define GREY {131, 140, 134}
 #define LBLU {153, 238, 255}
 #define WHITE {255, 255, 255}
 #define RED {255, 0, 0}
 #define PINK {255, 102, 255}
 #define DGREEN {0, 179, 60}
+#define PURPLE {131, 64, 207}
 
 #ifdef _______
 #undef _______
@@ -79,9 +81,17 @@ const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
     },
     [FUNC_LAYER] = {
-        LBLU,    PINK,    PINK,    LBLU,    LBLU,    PINK,    PINK,    LBLU,    LBLU,    PINK,    PINK,    LBLU,    LBLU,               PINK,    PINK,    PINK,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   LBLU,    LBLU,    LBLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   PINK,    PINK,    PINK,
+        YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              YELL,
+        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
+    },
+    [MACRO_LAYER] = {
+        YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              YELL,
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
@@ -90,17 +100,23 @@ const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
 
 const uint8_t PROGMEM borderledmap[][NUM_BORDER_KEYS][3] = {
     [KEY_LAYER] = {
-        YELL,    YELL,    BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU, // BOTTOM ROW, RIGHT TO LEFT
+        YELL,    YELL,    GREY,    BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU, // BOTTOM ROW, RIGHT TO LEFT
         BLU,     BLU,     WHITE,   YELL, // LEFT SIDE, going upwards
         YELL,    WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     WHITE,   WHITE,   BLU,     BLU,     BLU, // TOP ROW, LEFT TO RIGHT
-        BLU,     BLU,     YELL,    YELL, // RIGHT SIDE, going down
+        BLU,     BLU,     YELL, // RIGHT SIDE, going down
     },
     [FUNC_LAYER] = {
-        YELL,    YELL,    BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU, // BOTTOM ROW, RIGHT TO LEFT
+        DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN, // BOTTOM ROW, RIGHT TO LEFT
         BLU,     BLU,     WHITE,   YELL, // LEFT SIDE, going upwards
         YELL,    WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     WHITE,   WHITE,   BLU,     BLU,     BLU, // TOP ROW, LEFT TO RIGHT
-        BLU,     BLU,     YELL,    YELL, // RIGHT SIDE, going down
-    }
+        BLU,     BLU,     YELL, // RIGHT SIDE, going down
+    },
+    [MACRO_LAYER] = {
+        PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE, // BOTTOM ROW, RIGHT TO LEFT
+        BLU,     BLU,     WHITE,   YELL, // LEFT SIDE, going upwards
+        YELL,    WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     WHITE,   WHITE,   BLU,     BLU,     BLU, // TOP ROW, LEFT TO RIGHT
+        BLU,     BLU,     YELL, // RIGHT SIDE, going down
+    },
 };
 
 #ifdef _______
@@ -125,7 +141,6 @@ void rgb_matrix_indicators_user(void)
         return;
     }
     int layer = get_highest_layer(layer_state);
-    if (layer > 1) { layer = 1; }
     for (int i = 0; i < NUM_FRONT_KEYS; ++i)
     {
         uint8_t r = pgm_read_byte(&keyledmap[layer][i][0]);
