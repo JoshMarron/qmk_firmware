@@ -12,10 +12,18 @@ enum ctrl_keycodes {
     MD_BOOT,               //Restart into bootloader after hold timeout
     GITADDU,               // git add -u
     GCMSG,                 // git commit -m ""
+    GST,
+    GNBRNCH,
+    GDREM,
+    GAREM
 };
 
 #define GITADDSTR "gau"
 #define GCMSGSTR "gcmsg \"\""
+#define GSTSTR "git status"
+#define GNBRNCHSTR "git checkout -b "
+#define GDREMSTR "git remote remove "
+#define GAREMSTR "git remote add "
 
 static const int _FL = FUNC_LAYER;
 static const int _ML = MACRO_LAYER;
@@ -45,9 +53,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MACRO_LAYER] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, \
-        _______, GITADDU, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______, _______, _______, GCMSG,   _______, _______, _______, _______, _______, _______, _______, _______,                              _______, \
+        _______, _______, _______, _______, GAREM,   _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, \
+        _______, GITADDU, GST,     GDREM,   _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______, GCMSG,   _______, GNBRNCH, _______, _______, _______, _______, _______, _______,                              _______, \
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______ \
     ),
 };
@@ -74,27 +82,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
     [KEY_LAYER] = {
         YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              YELL,
-        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
+        WHITE,   WHITE,   WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , BLU,       BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   YELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   BLU,                                  YELL,
+        BLU,     BLU,     BLU,                       WHITE,                              BLU,     BLU,     BLU,     BLU,                YELL,    YELL,    YELL
     },
     [FUNC_LAYER] = {
         YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              YELL,
-        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
+        WHITE,   WHITE,   WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , BLU,       BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   YELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   BLU,                                  YELL,
+        BLU,     BLU,     BLU,                       WHITE,                              BLU,     BLU,     BLU,     BLU,                YELL,    YELL,    YELL
     },
     [MACRO_LAYER] = {
         YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   BLU,     BLU,     BLU,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                              YELL,
-        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            YELL,    YELL,    YELL
+        WHITE,   WHITE,   WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , WHITE  , BLU,       BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   YELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   BLU,                                  YELL,
+        BLU,     BLU,     BLU,                       WHITE,                              BLU,     BLU,     BLU,     BLU,                YELL,    YELL,    YELL
     },
 };
 
@@ -259,6 +267,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed)
             {
                 SEND_STRING(GCMSGSTR SS_TAP(X_LEFT));
+            }
+            return true;
+        case GST:
+            if (record->event.pressed)
+            {
+                SEND_STRING(GSTSTR SS_TAP(X_ENT));
+            }
+            return true;
+        case GNBRNCH:
+            if (record->event.pressed)
+            {
+                SEND_STRING(GNBRNCHSTR);
+            }
+            return true;
+        case GDREM:
+            if (record->event.pressed)
+            {
+                SEND_STRING(GDREMSTR);
+            }
+            return true;
+        case GAREM:
+            if (record->event.pressed)
+            {
+                SEND_STRING(GAREMSTR);
             }
             return true;
         default:
