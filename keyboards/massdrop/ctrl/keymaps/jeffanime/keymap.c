@@ -43,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(_FL), MO(_ML),  KC_RCTL,            KC_LEFT, KC_DOWN, KC_RGHT \
     ),
     [FUNC_LAYER] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______, \
+        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_RMOD, RGB_VAD, RGB_MOD, _______, _______, _______, _______, _______,            KC_MUTE, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   KC_MPLY, KC_MSTP, KC_VOLU, \
-        _______, RGB_SPD, RGB_VAI, RGB_SPI, RGB_HUI, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD, \
-        _______, RGB_RMOD,RGB_VAD, RGB_MOD, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, KC_UP,   _______, _______, RGB_SAI, _______, U_T_AUTO,U_T_AGCR,_______, _______, _______, _______, _______,   KC_MPRV, KC_MNXT, KC_VOLD, \
+        _______, KC_LEFT, KC_DOWN, KC_RGHT, RGB_HUD, RGB_SAD, _______, _______, _______, _______, _______, _______, _______, \
         _______, RGB_TOG, _______, _______, _______, MD_BOOT, NK_TOGG, _______, _______, _______, _______, _______,                              _______, \
         _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______ \
     ),
@@ -65,7 +65,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define BORDER_OFFSET 87
 
 #define YELL {237, 197, 66}
+#define LYELL {80, 80, 0}
 #define BLU  {24, 83, 201}
+#define CYAN {0, 80, 80}
 #define GREY {131, 140, 134}
 #define LBLU {153, 238, 255}
 #define WHITE {255, 255, 255}
@@ -79,6 +81,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define _______ {0, 0, 0}
 #endif
 
+#define COLORSCHEME_BREEZE 1
+#define COLORSCHEME_SUSHI 2
+
+#define COLORSCHEME_INDEX COLORSCHEME_BREEZE
+
+#if COLORSCHEME_INDEX == COLORSCHEME_BREEZE
 const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
     [KEY_LAYER] = {
         YELL,    WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,              BLU,     BLU,     BLU,
@@ -105,7 +113,36 @@ const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
         BLU,     BLU,     BLU,                       WHITE,                              BLU,     BLU,     BLU,     BLU,                YELL,    YELL,    YELL
     },
 };
+#elif COLORSCHEME_INDEX == COLORSCHEME_SUSHI
+const uint8_t PROGMEM keyledmap[][NUM_FRONT_KEYS][3] = {
+    [KEY_LAYER] = {
+        CYAN,    WHITE,   WHITE,   WHITE,   WHITE,   LYELL,   LYELL,   LYELL,   LYELL,   WHITE,   WHITE,   WHITE,   WHITE,              CYAN,    CYAN,    CYAN,
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    LYELL,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,                                CYAN,
+        BLU,     LYELL,   BLU,                       WHITE,                              BLU,     LYELL,   BLU,     BLU,                CYAN,    CYAN,    CYAN
+    },
+    [FUNC_LAYER] = {
+        CYAN,    WHITE,   WHITE,   WHITE,   WHITE,   LYELL,   LYELL,   LYELL,   LYELL,   WHITE,   WHITE,   WHITE,   WHITE,              CYAN,    CYAN,    CYAN,
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    LYELL,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,                                CYAN,
+        BLU,     LYELL,   BLU,                       WHITE,                              BLU,     LYELL,   BLU,     BLU,                CYAN,    CYAN,    CYAN
+    },
+    [MACRO_LAYER] = {
+        CYAN,    WHITE,   WHITE,   WHITE,   WHITE,   LYELL,   LYELL,   LYELL,   LYELL,   WHITE,   WHITE,   WHITE,   WHITE,              CYAN,    CYAN,    CYAN,
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    LYELL,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,     BLU,     BLU,     BLU,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,
+        BLU,     WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   WHITE,   LYELL,                                CYAN,
+        BLU,     LYELL,   BLU,                       WHITE,                              BLU,     LYELL,   BLU,     BLU,                CYAN,    CYAN,    CYAN
+    },
+};
+#endif
 
+#if COLORSCHEME_INDEX == COLORSCHEME_SUSHI
 const uint8_t PROGMEM borderledmap[][NUM_BORDER_KEYS][3] = {
     [KEY_LAYER] = {
         YELL,    YELL,    GREY,    BLU,     BLU,     BLU,     WHITE,   WHITE,   WHITE,   WHITE,   BLU,     BLU,     BLU, // BOTTOM ROW, RIGHT TO LEFT
@@ -126,6 +163,29 @@ const uint8_t PROGMEM borderledmap[][NUM_BORDER_KEYS][3] = {
         BLU,     BLU,     YELL, // RIGHT SIDE, going down
     },
 };
+#elif COLORSCHEME_INDEX == COLORSCHEME_BREEZE
+const uint8_t PROGMEM borderledmap[][NUM_BORDER_KEYS][3] = {
+    [KEY_LAYER] = {
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,   CYAN, // BOTTOM ROW, RIGHT TO LEFT
+        CYAN,    CYAN,    CYAN,    CYAN, // LEFT SIDE, going upwards
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN, // TOP ROW, LEFT TO RIGHT
+        CYAN,    CYAN,    CYAN, // RIGHT SIDE, going down
+    },
+    [FUNC_LAYER] = {
+        DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN,  DGREEN, // BOTTOM ROW, RIGHT TO LEFT
+        CYAN,    CYAN,    CYAN,    CYAN, // LEFT SIDE, going upwards
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN, // TOP ROW, LEFT TO RIGHT
+        CYAN,    CYAN,    CYAN, // RIGHT SIDE, going down
+    },
+    [MACRO_LAYER] = {
+        PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE,  PURPLE, // BOTTOM ROW, RIGHT TO LEFT
+        CYAN,    CYAN,    CYAN,    CYAN, // LEFT SIDE, going upwards
+        CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN,    CYAN, // TOP ROW, LEFT TO RIGHT
+        CYAN,    CYAN,    CYAN, // RIGHT SIDE, going down
+    },
+};
+#endif
+
 
 #ifdef _______
 #undef _______
