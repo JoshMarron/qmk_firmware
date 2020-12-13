@@ -37,12 +37,30 @@ const uint32_t PROGMEM unicode_map[] = {
 
 #define HSV_PANPNK 227, 255, 204
 #define HSV_PANGRN 99, 255, 179
+#define HSV_PANTEAL 146, 220, 230
 
+#define COLORWAY_ANALOG_DREAMS 1
+#define COLORWAY_NAUTILUS_NIGHTMARES 2
+
+#define SELECTED_COLORWAY COLORWAY_NAUTILUS_NIGHTMARES
+
+#if SELECTED_COLORWAY == COLORWAY_ANALOG_DREAMS
 const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_RED});
 const rgblight_segment_t PROGMEM default_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANPNK});
 const rgblight_segment_t PROGMEM second_layer[]   = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANGRN});
+const rgblight_segment_t PROGMEM third_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANTEAL});
+const rgblight_segment_t PROGMEM fourth_layer[] = RGBLIGHT_LAYER_SEGMENTS({10, 15, HSV_PANTEAL});
+#elif SELECTED_COLORWAY == COLORWAY_NAUTILUS_NIGHTMARES
+const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_RED});
+const rgblight_segment_t PROGMEM default_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANGRN});
+const rgblight_segment_t PROGMEM second_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANTEAL});
+const rgblight_segment_t PROGMEM third_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANPNK});
+const rgblight_segment_t PROGMEM fourth_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 20, HSV_PANPNK});
+#endif
 
-const rgblight_segment_t* const PROGMEM jeff_rgb_layers[] = RGBLIGHT_LAYERS_LIST(default_layer, second_layer, capslock_layer);
+const rgblight_segment_t* const PROGMEM jeff_rgb_layers[] = RGBLIGHT_LAYERS_LIST(default_layer, second_layer, third_layer, fourth_layer, capslock_layer);
+
+#define L3_F LT(3,KC_F)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap (Base Layer) Default Layer
@@ -61,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_65_ansi(
   KC_GRV,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_ESC, \
   KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_VOLU, \
-  KC_CAPS, KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_VOLD,  \
+  KC_CAPS, KC_A,    KC_S,   KC_D,   L3_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_VOLD,  \
   KC_LSFT, KC_Z,    KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_UP,            KC_MUTE,  \
-  KC_LCTL, KC_LGUI, KC_LALT,                KC_SPC,                          KC_RALT, MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
+  KC_LCTL, KC_LGUI, KC_LALT,                KC_SPC,                          KC_RALT, MO(1),   TG(2),   KC_LEFT, KC_DOWN, KC_RGHT),
 
     /* Keymap Fn Layer
      * ,----------------------------------------------------------------.
@@ -85,6 +103,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, GCMSG,   _______, GNBRNCH, _______, _______, KC_END,  KC_PGDN, KC_DOWN, _______, KC_PGUP,          KC_MPLY, \
   _______, _______, _______,                   _______,                            _______, _______, _______, KC_HOME, KC_PGDN, KC_END),
 
+    /* Keymap Construction Layer
+     * ,----------------------------------------------------------------.
+     * |~ `|F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |F10|F11|F12|Del    |Ins |
+     * |----------------------------------------------------------------|
+     * |     |   |Up |   |   |   |   |   |PSc|SLk|Pau|Up |   |     |    |
+     * |----------------------------------------------------------------|
+     * |      |Lef|Dow|Rig|   |   |   |   |Hom|PUp|Lef|Rig|        |    |
+     * |----------------------------------------------------------------|
+     * |        |   |   |   |   |   |   |   |End|PDn|Dow|      |PUp|    |
+     * |----------------------------------------------------------------|
+     * |    |    |    |                       |   |   |    |Hom|PDn|End |
+     * `----------------------------------------------------------------'
+     */
+
+[2] = LAYOUT_65_ansi(
+  _______, KC_1,    KC_6,    _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______,          _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______,          _______, \
+  _______, _______, _______,                   _______,                            _______, _______, _______, _______, _______, _______),
+
+
+    /* Keymap Navigation Layer
+     * ,----------------------------------------------------------------.
+     * |~ `|F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |F10|F11|F12|Del    |Ins |
+     * |----------------------------------------------------------------|
+     * |     |   |Up |   |   |   |   |   |PSc|SLk|Pau|Up |   |     |    |
+     * |----------------------------------------------------------------|
+     * |      |Lef|Dow|Rig|   |   |   |   |Hom|PUp|Lef|Rig|        |    |
+     * |----------------------------------------------------------------|
+     * |        |   |   |   |   |   |   |   |End|PDn|Dow|      |PUp|    |
+     * |----------------------------------------------------------------|
+     * |    |    |    |                       |   |   |    |Hom|PDn|End |
+     * `----------------------------------------------------------------'
+     */
+
+[3] = LAYOUT_65_ansi(
+  _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  _______, KC_UP,   _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,          _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______,          _______, \
+  _______, _______, _______,                   _______,                            _______, _______, _______, _______, _______, _______),
 };
 
 void keyboard_post_init_user(void) {
@@ -134,11 +194,13 @@ void matrix_scan_user(void) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, 0));
     rgblight_set_layer_state(1, layer_state_cmp(state, 1));
+    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    rgblight_set_layer_state(3, layer_state_cmp(state, 3));
     return state;
 }
 
 bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(2, led_state.caps_lock);
+    rgblight_set_layer_state(4, led_state.caps_lock);
     return true;
 }
 
